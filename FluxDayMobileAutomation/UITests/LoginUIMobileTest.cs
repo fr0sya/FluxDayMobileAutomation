@@ -10,11 +10,11 @@ using FluxDayMobileAutomation.PageObjects;
 namespace Appium
 {
     [TestFixture()]
-    public class AppiumTest
+    public class LoginUIMobailTest
     {
-        private IWebDriver driver;
-        private TimeSpan IMPLICIT_TIMEOUT_SEC = TimeSpan.FromSeconds(10);
         private const string LOGOUT_TEXT = "Logout";
+        private IWebDriver driver;
+        private TimeSpan implicitTimeoutSec = TimeSpan.FromSeconds(10);
 
         [SetUp]
         public void BeforeAll()
@@ -28,7 +28,7 @@ namespace Appium
             capabilities.SetCapability(MobileCapabilityType.DeviceName, "cool_c1");
 
             driver = new AndroidDriver<AppiumWebElement>(new Uri("http://localhost:4723/wd/hub"), capabilities, TimeSpan.FromSeconds(180));
-            driver.Manage().Timeouts().ImplicitlyWait(IMPLICIT_TIMEOUT_SEC);
+            driver.Manage().Timeouts().ImplicitlyWait(implicitTimeoutSec);
             driver.Url = "https://app.fluxday.io/users/sign_in";
         }
 

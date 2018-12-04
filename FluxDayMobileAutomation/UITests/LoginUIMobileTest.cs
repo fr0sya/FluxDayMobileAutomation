@@ -12,7 +12,6 @@ namespace Appium
     [TestFixture()]
     public class LoginUIMobailTest
     {
-        private const string LOGOUT_TEXT = "Logout";
         private IWebDriver driver;
         private TimeSpan implicitTimeoutSec = TimeSpan.FromSeconds(10);
 
@@ -39,9 +38,9 @@ namespace Appium
         }
 
         [Test]
-        [TestCase("admin@fluxday.io", "password", "Admin User")]
-        [TestCase("emp1@fluxday.io", "password", "Employee 1")]
-        public void LoginTest(string email, string password, string userName)
+        [TestCase("admin@fluxday.io", "password", "Admin User", "Logout")]
+        [TestCase("emp1@fluxday.io", "password", "Employee 1", "Logout")]
+        public void LoginTest(string email, string password, string userName, string logoutLabel)
         {
             var login = new LoginPageObject(driver);
             var mainManuPageObject = new MainMenuPageObject(driver);
@@ -66,12 +65,12 @@ namespace Appium
             if (userName == "Admin User")
             {
                 Assert.AreEqual(userName, mainManuPageObject.ManagerNameItem.Text);
-                Assert.AreEqual(LOGOUT_TEXT, mainManuPageObject.ManagerLogoutItem.Text);
+                Assert.AreEqual(logoutLabel, mainManuPageObject.ManagerLogoutItem.Text);
             }
             else
             {
                 Assert.AreEqual(userName, mainManuPageObject.EmployeeNameItem.Text);
-                Assert.AreEqual(LOGOUT_TEXT, mainManuPageObject.EmployeeLogoutItem.Text);
+                Assert.AreEqual(logoutLabel, mainManuPageObject.EmployeeLogoutItem.Text);
             }
         }
     }
